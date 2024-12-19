@@ -5,6 +5,8 @@ import requests
 import cv2
 from adafruit_dht import DHT11
 from gpiozero import DistanceSensor
+import readanalog.py
+
 
 # Define constants
 FARM_TOKEN = f"test"
@@ -24,12 +26,6 @@ ULTRASONIC_ECHO_PIN = 12  # GPIO pin for ultrasonic sensor echo
 dht_sensor = DHT11(PIN_DHT_SENSOR)
 distance_sensor = DistanceSensor(echo=ULTRASONIC_ECHO_PIN, trigger=ULTRASONIC_TRIGGER_PIN)
 
-def getAnalog(pin):
-    """
-    Mock function to simulate reading analog value from pin.
-    Replace this with the actual method to read analog values.
-    """
-    return random.randint(0, 255)
 
 def capture_image():
     """
