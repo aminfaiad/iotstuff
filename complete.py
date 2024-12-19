@@ -3,10 +3,11 @@ import random
 import json
 import requests
 import cv2
+import adafruit_dht
 from adafruit_dht import DHT11
 from gpiozero import DistanceSensor
-import readanalog.py
-
+from readanalog import *
+from lightcalibrate import predict_lux
 
 # Define constants
 FARM_TOKEN = f"test"
@@ -18,12 +19,12 @@ API_SENSOR_URL = "https://www.smartseaweed.site/api.php"
 PIN_PH_SENSOR = 0  # Replace with your analog pin for pH sensor
 PIN_SALINITY_SENSOR = 2  # Replace with your analog pin for salinity sensor
 PIN_LIGHT_SENSOR = 3  # Replace with your analog pin for light sensor
-PIN_DHT_SENSOR = 20  # GPIO pin connected to DHT11
+PIN_DHT_SENSOR = adafruit_dht.Pin(20)  # GPIO pin connected to DHT11
 ULTRASONIC_TRIGGER_PIN = 6  # GPIO pin for ultrasonic sensor trigger
 ULTRASONIC_ECHO_PIN = 12  # GPIO pin for ultrasonic sensor echo
 #gpiozero.DistanceSensor(echo=12, trigger=6)
 # Initialize sensors
-dht_sensor = DHT11(PIN_DHT_SENSOR)
+dht_sensor = adafruit_dht.DHT11(PIN_DHT_SENSOR)
 distance_sensor = DistanceSensor(echo=ULTRASONIC_ECHO_PIN, trigger=ULTRASONIC_TRIGGER_PIN)
 
 
@@ -99,14 +100,17 @@ def main():
     Main loop to read sensors and send data periodically.
     """
     while True:
+        print("Looping")
         sensor_data = read_sensors()
+        print(sensor_data)
         if sensor_data:
-            send_sensor_data(sensor_data)
+            #send_sensor_data(sensor_data)
             try:
+                pass
                 #image_file = capture_image()
                 #send_image(image_file)
             except Exception as e:
-                #print(f"Error capturing or sending image: {e}")
+                print(f"Error capturing or sending image: {e}")
         time.sleep(READ_INTERVAL)
 
 if __name__ == "__main__":
