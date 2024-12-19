@@ -7,19 +7,19 @@ from adafruit_dht import DHT11
 from gpiozero import DistanceSensor
 
 # Define constants
-FARM_TOKEN = f"farm_{random.randint(1000, 9999)}"
+FARM_TOKEN = f"test"
 READ_INTERVAL = 10  # seconds
-API_SENSOR_URL = "http://www.example.com/api"
-API_IMAGE_URL = "http://www.example.com/image"
+API_SENSOR_URL = "https://www.smartseaweed.site/api.php"
+#API_IMAGE_URL = "http://www.example.com/image"
 
 # Pin definitions
 PIN_PH_SENSOR = 0  # Replace with your analog pin for pH sensor
-PIN_SALINITY_SENSOR = 1  # Replace with your analog pin for salinity sensor
-PIN_LIGHT_SENSOR = 2  # Replace with your analog pin for light sensor
-PIN_DHT_SENSOR = 4  # GPIO pin connected to DHT11
-ULTRASONIC_TRIGGER_PIN = 23  # GPIO pin for ultrasonic sensor trigger
-ULTRASONIC_ECHO_PIN = 24  # GPIO pin for ultrasonic sensor echo
-
+PIN_SALINITY_SENSOR = 2  # Replace with your analog pin for salinity sensor
+PIN_LIGHT_SENSOR = 3  # Replace with your analog pin for light sensor
+PIN_DHT_SENSOR = 20  # GPIO pin connected to DHT11
+ULTRASONIC_TRIGGER_PIN = 6  # GPIO pin for ultrasonic sensor trigger
+ULTRASONIC_ECHO_PIN = 12  # GPIO pin for ultrasonic sensor echo
+#gpiozero.DistanceSensor(echo=12, trigger=6)
 # Initialize sensors
 dht_sensor = DHT11(PIN_DHT_SENSOR)
 distance_sensor = DistanceSensor(echo=ULTRASONIC_ECHO_PIN, trigger=ULTRASONIC_TRIGGER_PIN)
@@ -107,10 +107,10 @@ def main():
         if sensor_data:
             send_sensor_data(sensor_data)
             try:
-                image_file = capture_image()
-                send_image(image_file)
+                #image_file = capture_image()
+                #send_image(image_file)
             except Exception as e:
-                print(f"Error capturing or sending image: {e}")
+                #print(f"Error capturing or sending image: {e}")
         time.sleep(READ_INTERVAL)
 
 if __name__ == "__main__":

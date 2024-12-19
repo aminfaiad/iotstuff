@@ -1,6 +1,6 @@
 import adafruit_dht
 import gpiozero
-
+import time
 
 
 # dht = adafruit_dht.DHT11(adafruit_dht.Pin(20))
