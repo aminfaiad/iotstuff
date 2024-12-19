@@ -3,12 +3,14 @@ import gpiozero
 import time
 
 
-dht = adafruit_dht.DHT11(adafruit_dht.Pin(20))
+# dht = adafruit_dht.DHT11(adafruit_dht.Pin(20))
 
 
-
-
-'''
+###Light sensor
+### GELAP  =180 - 255
+### Sederhana 80-180
+### Cerah  < 80
+sensor = gpiozero.DistanceSensor(echo=12, trigger=6)
 try:
     while True:
         # Get the current distance in meters
@@ -20,4 +22,3 @@ try:
 
 except KeyboardInterrupt:
     print("Program stopped by user.")
-'''
