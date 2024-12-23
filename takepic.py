@@ -9,9 +9,44 @@ if not cap.isOpened():
     print("Error: Could not open webcam.")
     exit()
 
-# Set the resolution to 2K (2560x1440)
-cap.set(cv2.CAP_PROP_FRAME_WIDTH, 2560)
-cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 1440)
+# Desired settings
+desired_width = 2560
+desired_height = 1440
+desired_brightness = 128      # 0.0 to 1.0 or other range depending on driver
+desired_contrast = 128      # 0.0 to 1.0 or other range
+desired_saturation = 0      # 0.0 to 1.0 or other range
+desired_hue = 10.0            #0 for grayscale # typical range is -180 to 180 or 0.0 to 1.0
+desired_gain = 0.0            # 0.0 to ... (depends on driver)
+desired_exposure = 0         # negative values often mean auto-exposure off, but this can vary
+desired_autofocus = 1         # 1 for auto-focus on, 0 for off (if supported)
+# ----------------------------------------------------------------------
+# 1. SET all desired properties
+# ----------------------------------------------------------------------
+#cap.set(cv2.CAP_PROP_FRAME_WIDTH, desired_width)
+#cap.set(cv2.CAP_PROP_FRAME_HEIGHT, desired_height)
+#cap.set(cv2.CAP_PROP_BRIGHTNESS, desired_brightness)
+#cap.set(cv2.CAP_PROP_CONTRAST, desired_contrast)
+#cap.set(cv2.CAP_PROP_SATURATION, desired_saturation)
+#cap.set(cv2.CAP_PROP_HUE, desired_hue)
+#cap.set(cv2.CAP_PROP_GAIN, desired_gain)
+#cap.set(cv2.CAP_PROP_EXPOSURE, desired_exposure)
+# Some cameras do not support autofocus toggling via OpenCV, but we'll try:
+#cap.set(cv2.CAP_PROP_AUTOFOCUS, desired_autofocus)
+
+# ----------------------------------------------------------------------
+# 2. READ BACK the applied properties
+# ----------------------------------------------------------------------
+actual_width = cap.get(cv2.CAP_PROP_FRAME_WIDTH)
+actual_height = cap.get(cv2.CAP_PROP_FRAME_HEIGHT)
+actual_brightness = cap.get(cv2.CAP_PROP_BRIGHTNESS)
+actual_contrast = cap.get(cv2.CAP_PROP_CONTRAST)
+actual_saturation = cap.get(cv2.CAP_PROP_SATURATION)
+actual_hue = cap.get(cv2.CAP_PROP_HUE)
+actual_gain = cap.get(cv2.CAP_PROP_GAIN)
+actual_exposure = cap.get(cv2.CAP_PROP_EXPOSURE)
+actual_autofocus = cap.get(cv2.CAP_PROP_AUTOFOCUS)
+
+
 
 # Confirm the resolution
 width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
