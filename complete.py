@@ -12,7 +12,7 @@ from lightcalibrate import predict_lux
 # Define constants
 FARM_TOKEN = f"test"
 READ_INTERVAL = 10  # seconds
-API_SENSOR_URL = "https://www.smartseaweed.site/api.php"
+API_SENSOR_URL = "https://smartseaweed.site/Real/api.php"
 #API_IMAGE_URL = "http://www.example.com/image"
 
 # Pin definitions
@@ -78,7 +78,7 @@ def send_sensor_data(data):
     Sends sensor data as JSON to the API.
     """
     try:
-        response = requests.post(API_SENSOR_URL, json=data)
+        response = requests.post(API_SENSOR_URL, data=data)
         print(f"Sensor data sent: {response.status_code}, {response.text}")
     except Exception as e:
         print(f"Error sending sensor data: {e}")
@@ -104,7 +104,7 @@ def main():
         sensor_data = read_sensors()
         print(sensor_data)
         if sensor_data:
-            #send_sensor_data(sensor_data)
+            send_sensor_data(sensor_data)
             try:
                 pass
                 #image_file = capture_image()
