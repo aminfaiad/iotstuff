@@ -7,7 +7,7 @@ import adafruit_dht
 from adafruit_dht import DHT11
 from gpiozero import DistanceSensor
 from readanalog import *
-from lightcalibrate import predict_lux
+from calibration import predict_lux , predict_ph , predict_salinity
 
 # Define constants
 FARM_TOKEN = f"test"
@@ -63,10 +63,10 @@ def read_sensors():
         sonic_distance = measure_distance()
         return {
             "farm_token": FARM_TOKEN,
-            "ph_value": ph_value,
+            "ph_value": f"{predict_ph(ph_value):.2f}",
             "temperature": temperature,
-            "salinity": salinity,
-            "light_intensity": light_intensity,
+            "salinity": f"{predict_salinity(salinity):.2f}",
+            "light_intensity": f"{predict_lux(light_intensity):.2f}",
             "sonic_distance": sonic_distance,
         }
     except Exception as e:
