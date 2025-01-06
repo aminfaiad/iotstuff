@@ -12,18 +12,18 @@ if not cap.isOpened():
 # Desired settings
 desired_width = 2560
 desired_height = 1440
-desired_brightness = 128      # 0.0 to 1.0 or other range depending on driver
-desired_contrast = 128      # 0.0 to 1.0 or other range
-desired_saturation = 0      # 0.0 to 1.0 or other range
-desired_hue = 10.0            #0 for grayscale # typical range is -180 to 180 or 0.0 to 1.0
-desired_gain = 0.0            # 0.0 to ... (depends on driver)
-desired_exposure = 0         # negative values often mean auto-exposure off, but this can vary
-desired_autofocus = 1         # 1 for auto-focus on, 0 for off (if supported)
+#desired_brightness = 128      # 0.0 to 1.0 or other range depending on driver
+#desired_contrast = 128      # 0.0 to 1.0 or other range
+#desired_saturation = 0      # 0.0 to 1.0 or other range
+#desired_hue = 10.0            #0 for grayscale # typical range is -180 to 180 or 0.0 to 1.0
+#desired_gain = 0.0            # 0.0 to ... (depends on driver)
+#desired_exposure = 0         # negative values often mean auto-exposure off, but this can vary
+#desired_autofocus = 1         # 1 for auto-focus on, 0 for off (if supported)
 # ----------------------------------------------------------------------
 # 1. SET all desired properties
 # ----------------------------------------------------------------------
-#cap.set(cv2.CAP_PROP_FRAME_WIDTH, desired_width)
-#cap.set(cv2.CAP_PROP_FRAME_HEIGHT, desired_height)
+cap.set(cv2.CAP_PROP_FRAME_WIDTH, desired_width)
+cap.set(cv2.CAP_PROP_FRAME_HEIGHT, desired_height)
 #cap.set(cv2.CAP_PROP_BRIGHTNESS, desired_brightness)
 #cap.set(cv2.CAP_PROP_CONTRAST, desired_contrast)
 #cap.set(cv2.CAP_PROP_SATURATION, desired_saturation)
