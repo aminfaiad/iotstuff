@@ -1,6 +1,5 @@
 import cv2
 import requests
-import os
 
 def capture_and_upload_image(api_url, farm_token):
     """
@@ -16,22 +15,19 @@ def capture_and_upload_image(api_url, farm_token):
     """
     # Initialize the camera (0 is the default camera index)
     camera = cv2.VideoCapture(0)
+    temp_filename = "temp.jpg"  # Temporary file name
 
-    if not camera.isOpened():
-        return {"status": "error", "message": "Could not open camera."}
-
-    # Capture a frame
-    ret, frame = camera.read()
-
-    # Release the camera after capturing
-    camera.release()
-
-    if not ret:
-        return {"status": "error", "message": "Could not read frame from camera."}
-
-    # Save the frame as a temporary file
-    temp_filename = "temp.jpg"
     try:
+        if not camera.isOpened():
+            return {"status": "error", "message": "Could not open camera."}
+
+        # Capture a frame
+        ret, frame = camera.read()
+
+        if not ret:
+            return {"status": "error", "message": "Could not read frame from camera."}
+
+        # Save the frame as a temporary file
         cv2.imwrite(temp_filename, frame)
 
         # Prepare the POST request payload
@@ -50,16 +46,18 @@ def capture_and_upload_image(api_url, farm_token):
             "status": "success" if response.status_code == 200 else "error",
             "message": response.text,
             "status_code": response.status_code,
-            "temp_file": temp_filename
         }
     except Exception as e:
-        return {"status": "error", "message": str(e), "temp_file": temp_filename}
+        return {"status": "error", "message": str(e)}
+    finally:
+        # Ensure the camera is released
+        if camera.isOpened():
+            camera.release()
 
 # Example usage
 if __name__ == "__main__":
     api_url = "https://smartseaweed.site/Real/upload_img.php"
-    farm_token = "95cae43727abd5ac940d28f713af5621"
+    farm_token = "b7c814fb298dcb1855b7953928550b3a"
 
     result = capture_and_upload_image(api_url, farm_token)
     print(result)
-    print(f"Temporary file saved as: {result['temp_file']}")

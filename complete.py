@@ -8,12 +8,14 @@ from adafruit_dht import DHT11
 from gpiozero import DistanceSensor
 from readanalog import *
 from calibration import predict_lux , predict_ph , predict_salinity
+from capture_and_upload import capture_and_upload_image
+import asyncio
 
 # Define constants
 FARM_TOKEN = f"test"
 READ_INTERVAL = 10  # seconds
 API_SENSOR_URL = "https://smartseaweed.site/Real/api.php"
-#API_IMAGE_URL = "http://www.example.com/image"
+API_IMAGE_URL = "https://smartseaweed.site/Real/upload_img.php"
 
 # Pin definitions
 PIN_PH_SENSOR = 0  # Replace with your analog pin for pH sensor
@@ -113,5 +115,28 @@ def main():
                 print(f"Error capturing or sending image: {e}")
         time.sleep(READ_INTERVAL)
 
+
+async def async_sensor_loop():
+    while True:
+        sensor_data = read_sensors()
+        print(sensor_data)
+        if sensor_data:
+            send_sensor_data(sensor_data)
+        asyncio.sleep(10)
+
+async def async_camera_loop():
+    while True:
+        try:
+            capture_and_upload_image(API_IMAGE_URL,FARM_TOKEN)
+        asyncio.sleep(60)
+
+async def async_main():
+    results = await asyncio.gather(
+        async_sensor_loop(),
+        async_camera_loop()
+    )
+
+
 if __name__ == "__main__":
     main()
+    #asyncio.run(async_main())
