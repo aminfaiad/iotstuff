@@ -19,7 +19,7 @@ API_SENSOR_URL = "https://smartseaweed.site/Real/api.php"
 PIN_PH_SENSOR = 0  # Replace with your analog pin for pH sensor
 PIN_SALINITY_SENSOR = 2  # Replace with your analog pin for salinity sensor
 PIN_LIGHT_SENSOR = 3  # Replace with your analog pin for light sensor
-PIN_DHT_SENSOR = adafruit_dht.Pin(20)  # GPIO pin connected to DHT11
+PIN_DHT_SENSOR = adafruit_dht.Pin(21)  # GPIO pin connected to DHT11
 ULTRASONIC_TRIGGER_PIN = 6  # GPIO pin for ultrasonic sensor trigger
 ULTRASONIC_ECHO_PIN = 12  # GPIO pin for ultrasonic sensor echo
 #gpiozero.DistanceSensor(echo=12, trigger=6)
