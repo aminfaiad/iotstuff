@@ -9,8 +9,8 @@ ph_output_values = np.array([0, 128, 255])  # Output values for pH
 ph_values = np.array([0, 7, 14])  # Corresponding pH values
 
 # Salinity (PPT) data points and corresponding output values (dummy values)
-salinity_output_values = np.array([0, 128, 255])  # Example output values for salinity
-salinity_values = np.array([0, 15, 35])  # Corresponding salinity values in PPT (parts per thousand)
+salinity_output_values = np.array([0,10, 20, 45,58,125])  # Example output values for salinity
+salinity_values = np.array([0, 10, 20,30,40,60])  # Corresponding salinity values in PPT (parts per thousand)
 
 # Fit a polynomial of degree 3 for lux values
 lux_degree = 3
@@ -23,7 +23,7 @@ ph_coefficients = np.polyfit(ph_output_values, ph_values, ph_degree)
 ph_polynomial = np.poly1d(ph_coefficients)
 
 # Fit a polynomial of degree 3 for salinity values (to predict salinity)
-salinity_degree = 2
+salinity_degree = 3
 salinity_coefficients = np.polyfit(salinity_output_values, salinity_values, salinity_degree)
 salinity_polynomial = np.poly1d(salinity_coefficients)
 
@@ -40,7 +40,7 @@ def predict_salinity(value):
     return salinity_polynomial(value)
 
 # Example usage
-output_value = 0
+output_value = 100
 print(f"Predicted Lux for output {output_value}: {predict_lux(output_value)}")
 print(f"Predicted pH for output {output_value}: {predict_ph(output_value)}")
 print(f"Predicted Salinity for output {output_value}: {predict_salinity(output_value)}")
