@@ -12,14 +12,14 @@ from capture_and_upload import capture_and_upload_image
 import asyncio
 
 # Define constants
-FARM_TOKEN = f"test"
+FARM_TOKEN = f"8a2dcd67646081ef53ed4b21958c57f4"
 READ_INTERVAL = 10  # seconds
 API_SENSOR_URL = "https://smartseaweed.site/Real/api.php"
 API_IMAGE_URL = "https://smartseaweed.site/Real/upload_img.php"
 
 # Pin definitions
 PIN_PH_SENSOR = 0  # Replace with your analog pin for pH sensor
-PIN_SALINITY_SENSOR = 2  # Replace with your analog pin for salinity sensor
+PIN_SALINITY_SENSOR = 1  # Replace with your analog pin for salinity sensor
 PIN_LIGHT_SENSOR = 3  # Replace with your analog pin for light sensor
 PIN_DHT_SENSOR = adafruit_dht.Pin(21)  # GPIO pin connected to DHT11
 ULTRASONIC_TRIGGER_PIN = 6  # GPIO pin for ultrasonic sensor trigger
@@ -122,13 +122,15 @@ async def async_sensor_loop():
         print(sensor_data)
         if sensor_data:
             send_sensor_data(sensor_data)
-        asyncio.sleep(10)
+        await asyncio.sleep(5)
 
 async def async_camera_loop():
     while True:
         try:
             capture_and_upload_image(API_IMAGE_URL,FARM_TOKEN)
-        asyncio.sleep(60)
+        except:
+            print("Error uploading image")
+        await asyncio.sleep(7)
 
 async def async_main():
     results = await asyncio.gather(
@@ -138,5 +140,5 @@ async def async_main():
 
 
 if __name__ == "__main__":
-    main()
-    #asyncio.run(async_main())
+    #main()
+    asyncio.run(async_main())
