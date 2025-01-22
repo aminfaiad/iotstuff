@@ -9,8 +9,8 @@ ph_output_values = np.array([0, 128, 255])  # Output values for pH
 ph_values = np.array([0, 7, 14])  # Corresponding pH values
 
 # Salinity (PPT) data points and corresponding output values (dummy values)
-salinity_output_values = np.array([0,10, 20, 45,58,125])  # Example output values for salinity
-salinity_values = np.array([0, 10, 20,30,40,60])  # Corresponding salinity values in PPT (parts per thousand)
+salinity_output_values = np.array([0,10, 20, 30,39])  # Example output values for salinity
+salinity_values = np.array([0, 10, 15,30,45])  # Corresponding salinity values in PPT (parts per thousand)
 
 # Fit a polynomial of degree 3 for lux values
 lux_degree = 3
