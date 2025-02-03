@@ -1,9 +1,0 @@
-Camera Settings Before Attempted Update:
- - Resolution     : 2560.0 x 1440.0
- - Brightness     : 128.0
- - Contrast       : 128.0
- - Saturation     : 128.0
- - Hue            : -1.0
- - Gain           : 0.0
- - Exposure       : 166.0
- - Autofocus      : 1.0
